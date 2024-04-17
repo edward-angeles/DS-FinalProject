@@ -3,6 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct BookList {
+	Book* BookInfo;		
+	struct BookList* PreviousBook;
+	struct BookList* NextBook;
+} temp;
 
 void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo);
 
@@ -20,11 +25,7 @@ void PrintPreviousBook(struct BookList* tail);
 
 void PrintNextBook(struct BookList* tail);
 
-struct BookList {
-	Book* BookInfo;		
-	struct BookList* PreviousBook;
-	struct BookList* NextBook;
-} temp;
+
 
 void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo) {
 	struct BookList* newBook = (struct BookList*)malloc(sizeof(struct BookList));
