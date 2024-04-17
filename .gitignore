@@ -1,0 +1,4 @@
+.idea/
+CMakeLists.txt
+TestSortedLinkedList.cpp
+cmake-build-debug/

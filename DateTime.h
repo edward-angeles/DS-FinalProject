@@ -66,15 +66,15 @@ public:
 	};
 
 
-	int GetDay(void) {
+	int GetDay(void) const{
 		return this->day;
 	}
 
-	int GetMonth(void) {
+	int GetMonth(void) const{
 		return this->month;
 	}
 
-	int GetYear(void) {
+	int GetYear(void) const{
 		return this->year;
 	}
 
