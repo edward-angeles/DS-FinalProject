@@ -3,14 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct BookList {
-	Book BookInfo;		// This need to change tobe the hash table 
-	HashTable  key;		//??T_T
-	struct BookList* PreviousBook;
-	struct BookList* NextBook;
-} temp;
 
-void AddNewBook(struct BookList** head, struct BookList** tail, Book bookInfo);
+void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo);
 
 void PrintBookList(struct BookList* head);
 
@@ -22,8 +16,17 @@ void PrintLastAddedBook(struct BookList* tail);
 
 void PrintBook(struct BookList* tail);
 
+void PrintPreviousBook(struct BookList* tail);
 
-void AddNewBook(struct BookList** head, struct BookList** tail, Book bookInfo) {
+void PrintNextBook(struct BookList* tail);
+
+struct BookList {
+	Book* BookInfo;		
+	struct BookList* PreviousBook;
+	struct BookList* NextBook;
+} temp;
+
+void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo) {
 	struct BookList* newBook = (struct BookList*)malloc(sizeof(struct BookList));
 
 	if (newBook == NULL) {
@@ -48,10 +51,28 @@ void AddNewBook(struct BookList** head, struct BookList** tail, Book bookInfo) {
 }
 
 
-void PrintBook(struct BookList* tail) {			//change so any book can be printed
-	struct BookList* current = tail;
+void PrintBook(struct BookList* current) {			
 	printf("Book Information:\n\tTitle: %c\n\tAuthor: %c\n\tGenre: %c\n\tPublication Date: %d,%d,%d\n\tAvailablity: %d\n\tReviews: %d\n\tRatings: %f\n", current->BookInfo);
 	printf("-------------\n");
+}
+
+void PrintPreviousBook(struct BookList* tail) {
+	struct BookList* current = tail->PreviousBook;
+	if (tail->PreviousBook == NULL) {
+		printf("No Older Books in List");
+		return;
+	}
+	PrintBook(current);
+}
+
+
+void PrintNextBook(struct BookList* tail) {
+	struct BookList* current = tail->NextBook;
+	if (tail->NextBook == NULL) {
+		printf("No Newer Books in List");
+		return;
+	}
+	PrintBook(current);
 }
 
 void PrintLastAddedBook(struct BookList* tail) {
@@ -70,7 +91,7 @@ void PrintBookList(struct BookList* tail) {
 
 void DeleteLastAddedBook(struct BookList** head, struct BookList** tail) {
 	if (*tail == NULL) {
-		printf("List is Empty");			//change so any book can be deleted
+		printf("List is Empty");			
 		return;
 	}
 
@@ -87,9 +108,6 @@ void DeleteLastAddedBook(struct BookList** head, struct BookList** tail) {
 
 	free(temp);
 }
-
-
-
 
 
 void FreeList(struct BookList* head) {
