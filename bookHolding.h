@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <new.h>
 
 typedef struct Node {
 	int readerID;
