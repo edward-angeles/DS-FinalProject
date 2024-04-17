@@ -1,4 +1,4 @@
-#include "bookHolding.h"
+#include "reservationQueue.h"
 
 queue* initializeQueue(void) {
 	queue* newQueue = (queue*)malloc(sizeof(queue));
@@ -14,7 +14,7 @@ queue* initializeQueue(void) {
 	return newQueue;
 }
 
-node* createNewNode(int newReaderID) {
+node* createNewNode(int newReaderID, const char* bookTitle) {
 	node* newNode = (node*)malloc(sizeof(node));
 
 	if (newNode == NULL) {
@@ -23,6 +23,7 @@ node* createNewNode(int newReaderID) {
 	}
 	
 	newNode->readerID = newReaderID;
+	newNode->bookTitle = bookTitle;
 	newNode->nextNode = NULL;
 	
 	return newNode;
@@ -32,12 +33,12 @@ bool isQueueEmpty(queue* queue) {
 	return queue->front == NULL;
 }
 
-void enqueue(queue* queue, int newReaderID) {
+void enqueue(queue* queue, int newReaderID, const char* bookTitle) {
 	if (queue == NULL) { // Check if there is a queue at all
 		queue = initializeQueue();
 	}
 
-	node* nodeToEnqueue = createNewNode(newReaderID);
+	node* nodeToEnqueue = createNewNode(newReaderID, bookTitle);
 
 	if (isQueueEmpty(queue)) { // Check if the queue is empty
 		queue->front = nodeToEnqueue;
@@ -76,35 +77,55 @@ int peek(queue* queue) {
 	return queue->front->readerID;
 }
 
+int lengthOfQueue(queue* queue) {
+	int length = 0;
+	node* current = queue->front;
+
+	if (isQueueEmpty(queue)) {
+		return length;
+	}
+
+	else {
+		while (current != NULL) {
+			current = current->nextNode;
+			length++;
+		}
+		
+		return length;
+	}
+}
+
 void showQueue(queue* queue) {
 
 	if (isQueueEmpty(queue)) {
-		printf("The queue for this book is empty.\n");
+		printf("The queue for %s is empty.\n", queue->front->bookTitle);
 		return;
 	}
 
-	printf("Queue For Book Hold:\n");
+	printf("The reservation queue for -> %s\n", queue->front->bookTitle);
 	node* current = queue->front;
 
-	while (current != NULL) {
-		printf("Reader ID: %d\n", current->readerID);
+	for (int i = 0; i < lengthOfQueue(queue); i++) {
+		printf("%d. Reader ID: %d\n", i + 1, current->readerID);
 		current = current->nextNode;
 	}
 	
 	printf("\n");
+
+	return;
 }
 
-
+/*
 int main(void) {
 	queue* queue1 = initializeQueue();
 
-	enqueue(queue1, 11);
-	enqueue(queue1, 13);
-	enqueue(queue1, 23);
-	enqueue(queue1, 32);
+	enqueue(queue1, 11, "Harry Potter");
+	enqueue(queue1, 13, "Harry Potter");
+	enqueue(queue1, 23, "Harry Potter");
+	enqueue(queue1, 32, "Harry Potter");
 
 	printf("The Front Element Is: %d\n", peek(queue1));
-
+	
 	int deQueuedElement = dequeue(queue1);
 
 	printf("DeQueued Element Is: %d\n", deQueuedElement);
@@ -113,6 +134,7 @@ int main(void) {
 	showQueue(queue1);
 
 	free(queue1);
-
+	
 	return 0;
 }
+*/
