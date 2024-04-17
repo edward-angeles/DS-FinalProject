@@ -1,8 +1,7 @@
 #include "bookHolding.h"
 
 queue* initializeQueue(void) {
-	queue* newQueue;
-	newQueue = new queue;
+	queue* newQueue = (queue*)malloc(sizeof(queue));
 
 	if (newQueue == NULL) {
 		printf("Error: There is no memory space.\n");
@@ -16,8 +15,7 @@ queue* initializeQueue(void) {
 }
 
 node* createNewNode(int newReaderID) {
-	node* newNode;
-	newNode = new node;
+	node* newNode = (node*)malloc(sizeof(node));
 
 	if (newNode == NULL) {
 		printf("Error: There is no memory space.\n");
@@ -35,7 +33,7 @@ bool isQueueEmpty(queue* queue) {
 }
 
 void enqueue(queue* queue, int newReaderID) {
-	if (queue->front == NULL) { // Check if there is a queue at all
+	if (queue == NULL) { // Check if there is a queue at all
 		queue = initializeQueue();
 	}
 
@@ -43,13 +41,13 @@ void enqueue(queue* queue, int newReaderID) {
 
 	if (isQueueEmpty(queue)) { // Check if the queue is empty
 		queue->front = nodeToEnqueue;
-		queue->rear = nodeToEnqueue;
 	}
 	
 	else {
-		queue->rear->nextNode = nodeToEnqueue;
-		queue->rear = nodeToEnqueue;  
+		queue->rear->nextNode = nodeToEnqueue; 
 	}
+
+	queue->rear = nodeToEnqueue;
 }
 
 int dequeue(queue* queue) {
@@ -85,12 +83,11 @@ void showQueue(queue* queue) {
 		return;
 	}
 
-	printf("Queue for book hold\n");
-	printf("-----------------------------------");
+	printf("Queue For Book Hold:\n");
 	node* current = queue->front;
 
 	while (current != NULL) {
-		printf("\tReaders ID: %d\n", current->readerID);
+		printf("Reader ID: %d\n", current->readerID);
 		current = current->nextNode;
 	}
 	
@@ -115,7 +112,7 @@ int main(void) {
 
 	showQueue(queue1);
 
-	delete queue1;
+	free(queue1);
 
 	return 0;
 }
