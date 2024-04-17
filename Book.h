@@ -2,10 +2,11 @@
 #include "DateTime.h"
 
 #pragma warning(disable:4996)
-
+#include <string.h>
 class Book {
 
 private:
+	char* id;
 	char* title;
 	char* author;
 	char* genre;
@@ -17,7 +18,8 @@ private:
 public:
 
 	// constructor
-	Book(char* title, char* author, char* genre, int day, int month, int year, int availability, int totalReviews = 0, float rating = 0) : publicationDate(day, month, year) {
+	Book(char* id, char* title, char* author, char* genre, int day, int month, int year, int availability, int totalReviews = 0, float rating = 0) : publicationDate(day, month, year) {
+		this->id = id;
 		this->title = title;
 		this->author = author;
 		this->genre = genre;
@@ -27,6 +29,7 @@ public:
 	}
 
 	Book(void) : publicationDate(DEFAULT_DAY, DEFAULT_MONTH, DEFAULT_YEAR){
+		strcpy(id, "DEFAULT");
 		strcpy(title, "DEFAULT");
 		strcpy(author, "DEFAULT1");
 		strcpy(genre, "DEFAULT");
@@ -36,6 +39,9 @@ public:
 
 	}
 
+	char* GetId() {
+		return id;
+	}
 
 	char* GetTitle() {
 		return title;
