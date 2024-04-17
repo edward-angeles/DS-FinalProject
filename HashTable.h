@@ -91,15 +91,17 @@ public:
 	}
 
 
-	// Get an element by the unhashed key
-	V GetElementByKey(K key) {
+// Get an element by the unhashed key
+V GetElementByKey(K key) {
 
-		// hash the key
-		int index = HashKey(key);
+	// hash the key
+	int index = HashKey(key);
 
-		//Grab the current value at that hashed index
-		HashNode<K, V>* curValue = values[index];
+	//Grab the current value at that hashed index
+	HashNode<K, V>* curValue = values[index];
 
+	// If it isn't null the key was valid
+	if (curValue != NULL) {
 		//If that value has any linked nodes then there was a conflict with that key
 		if (curValue->HasNext()) {
 
@@ -107,9 +109,12 @@ public:
 			return ScanLinksForKey(curValue, key);
 		}
 		else {
+			//Otherwise return value
 			return curValue->GetValue();
 		}
 	}
+	return NULL;
+}
 
 
 	// Add new element
