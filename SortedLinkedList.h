@@ -13,15 +13,16 @@ bool operator==(const Date& lhs, const Date& rhs);
 bool operator<(const Date& lhs, const Date& rhs);
 bool operator<=(const Date& lhs, const Date& rhs);
 
+
 class SortedLinkedList {
 private:
-    constexpr static const std::string TITLE = "title";
-    constexpr static const std::string AUTHOR = "author";
-    constexpr static const std::string RATING = "rating";
-    constexpr static const std::string GENRE = "genre";
-    constexpr static const std::string REVIEW = "reviews";
-    constexpr static const std::string AVAILABILITY = "availability";
-    constexpr static const std::string DATE = "date";
+    constexpr static const auto TITLE = "title";
+    constexpr static const auto AUTHOR = "author";
+    constexpr static const auto RATING = "rating";
+    constexpr static const auto GENRE = "genre";
+    constexpr static const auto REVIEW = "reviews";
+    constexpr static const auto AVAILABILITY = "availability";
+    constexpr static const auto DATE = "date";
 
     Node *head;
     int length;
@@ -33,7 +34,7 @@ private:
     Node* CreateNode(Book* book);
 
 public:
-    SortedLinkedList(Book* books[], std::string& key, int length);
+    SortedLinkedList(Book* books[], char* key, int length);
     ~SortedLinkedList();
 
     void InsertSorted(Book* book);
