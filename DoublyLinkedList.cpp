@@ -1,7 +1,7 @@
-#include "DoublyLinkedList"
+#include "DoublyLinkedList.h"
 
-void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo) {
-	struct BookList* newBook = (struct BookList*)malloc(sizeof(struct BookList));
+void AddNewBook(BookList** head, BookList** tail, Book* bookInfo) {
+	BookList* newBook = (BookList*)malloc(sizeof BookList);
 
 	if (newBook == NULL) {
 		printf("No Memory");
@@ -13,7 +13,7 @@ void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo) 
 	newBook->NextBook = NULL;
 
 	if (*tail == NULL) {
-		*tail = newBook;
+		(*tail) = newBook;
 		*head = newBook;
 		return;
 	}
@@ -25,8 +25,27 @@ void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo) 
 }
 
 
-void PrintBook(struct BookList* current) {			
-	printf("Book Information:\n\tTitle: %c\n\tAuthor: %c\n\tGenre: %c\n\tPublication Date: %d,%d,%d\n\tAvailablity: %d\n\tReviews: %d\n\tRatings: %f\n", current->BookInfo);
+void PrintBook(struct BookList* current) {
+	Book* book = current->BookInfo;
+	printf(	
+		"Book Information:\n\t"
+		"Title: %s\n\t"
+		"Author: %s\n\t"
+		"Genre: %s\n\t"
+		"Publication Date: %d,%d,%d\n\t"
+		"Availablity: %d\n\t"
+		"Reviews: %d\n\t"
+		"Ratings: %f\n", 
+		book->GetTitle(), 
+		book->GetAuthor(), 
+		book->GetGenre(), 
+		book->GetPublicationDate().GetDay(), 
+		book->GetPublicationDate().GetMonth(),
+		book->GetPublicationDate().GetYear(),
+		book->GetAvailability(),
+		book->GetTotalReviews(),
+		book->GetRating()
+	);
 	printf("-------------\n");
 }
 
