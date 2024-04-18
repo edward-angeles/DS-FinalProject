@@ -114,27 +114,3 @@ void showQueue(queue* queue) {
 
 	return;
 }
-
-/*
-int main(void) {
-	queue* queue1 = initializeQueue();
-
-	enqueue(queue1, 11, "Harry Potter");
-	enqueue(queue1, 13, "Harry Potter");
-	enqueue(queue1, 23, "Harry Potter");
-	enqueue(queue1, 32, "Harry Potter");
-
-	printf("The Front Element Is: %d\n", peek(queue1));
-	
-	int deQueuedElement = dequeue(queue1);
-
-	printf("DeQueued Element Is: %d\n", deQueuedElement);
-	printf("The Front Element after DeQueue Is: %d\n", peek(queue1));
-
-	showQueue(queue1);
-
-	free(queue1);
-	
-	return 0;
-}
-*/
