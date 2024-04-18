@@ -29,6 +29,15 @@ SortedLinkedList::SortedLinkedList(Book* books[], std::string& key, int length):
     SortLinkedList();
 }
 
+SortedLinkedList::~SortedLinkedList() {
+    auto current = head;
+    while (current != nullptr) {
+        auto next = current->next;
+        delete current;
+        current = next;
+    }
+}
+
 
 std::variant<std::string, double, int, Date> SortedLinkedList::GetBookKey(Book* book) {
     if (key == TITLE) {
@@ -52,7 +61,7 @@ std::variant<std::string, double, int, Date> SortedLinkedList::GetBookKey(Book* 
     else if (key == AVAILABILITY) {
         return book->GetAvailability();
     } else {
-        return nullptr;
+        throw std::runtime_error("Invalid key provided: " + key);
     }
 }
 
@@ -88,20 +97,28 @@ void SortedLinkedList::InsertSorted(Book* book) {
         node->next = head;
         head = node;
         return;
-        }
+    }
+
+    auto head_key = GetBookKey(head->val);
+    auto current_node_key = GetBookKey(node->val);
+    if (current_node_key < head_key) {
+        node->next = head;
+        head = node;
+        return;
+    }
 
     while (current->next) {
         auto current_key = GetBookKey(current->val);
         auto current_next_key = GetBookKey(current->next->val);
         auto node_key = GetBookKey(node->val);
-        if (current_key <= node_key &&node_key<current_next_key) {
+        if (current_key <= node_key && node_key < current_next_key) {
             node->next = current->next;
             current->next = node;
             return;
         }
+        current = current->next;
     }
     current->next = node;
-    return;
 }
 
 const Book* SortedLinkedList::RemoveByIndex(int index) {
@@ -109,9 +126,10 @@ const Book* SortedLinkedList::RemoveByIndex(int index) {
     int current_index = 1;
     if (index == current_index) {
         auto tmp = head;
-        delete head;
-        head = tmp->next;
-        return tmp->val;
+        auto book = tmp->val;
+        head = head->next;
+        delete tmp;
+        return book;
     }
     if (index == length) {
         while (current_index != length-1) {
@@ -119,17 +137,21 @@ const Book* SortedLinkedList::RemoveByIndex(int index) {
             current_index++;
         }
         auto tmp = current->next;
-        delete current->next;
+        auto book = tmp->val;
         current->next = nullptr;
-        return tmp->val;
+        delete tmp;
+        return book;
     }
     while (current) {
         if (current_index+1 == index) {
             auto tmp = current->next;
-            delete current->next;
+            auto book = tmp->val;
             current->next = tmp->next;
-            return tmp->val;
+            delete tmp;
+            return book;
         }
+        current_index++;
+        current = current->next;
     }
 }
 

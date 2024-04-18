@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <variant>
 #include <vector>
+#include <stdexcept>
 
 
 bool operator==(const Date& lhs, const Date& rhs);
@@ -33,8 +34,7 @@ private:
 
 public:
     SortedLinkedList(Book* books[], std::string& key, int length);
-
-
+    ~SortedLinkedList();
 
     void InsertSorted(Book* book);
     const Book* RemoveByIndex(int index);

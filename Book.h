@@ -1,4 +1,6 @@
 #pragma once
+
+#include <cstring>
 #include "DateTime.h"
 
 #pragma warning(disable:4996)
@@ -37,7 +39,7 @@ public:
 	}
 
 
-	char* GetTitle() {
+	char * GetTitle() const {
 		return title;
 	}
 
