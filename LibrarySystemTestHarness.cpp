@@ -23,17 +23,57 @@ int main(void) {
 
 	printf("Welcome to ShelfSensei the Library Management System");
 
-	while(true) {
+	int choice, bookDay, bookMonth, bookYear, bookAvailablity, bookReviews;
+	float bookRatings;
+	char bookName[50], bookAuthor[50], bookGenre[50];
+
+	while (true) {
+		displayMenu();
+		printf("Enter your choice: ");
+		scanf("%d", choice);
+
+		switch (choice) {
+		case 1:
+			printf("\nEnter book title: ");
+			scanf("%49s", bookName);
+
+			printf("\nEnter book author: ");
+			scanf("%49s", bookAuthor);
+
+			printf("\nEnter book Genre: ");
+			scanf("%49s", bookGenre);
+
+			printf("\nEnter book publication date: ");
+			scanf("%49d", bookDay);
+			scanf("%49d", bookMonth);
+			scanf("%49d", bookYear);
+
+			printf("\nEnter book Availablity: ");
+			scanf("%49d", bookAvailablity);
+
+			printf("\nEnter book Reviews: ");
+			scanf("%49d", bookReviews);
+
+			printf("\nEnter book Ratings: ");
+			scanf("%1.1f", bookRatings);
+
+		default:
+
+
+			printf("Invalid choice. Please try again.\n");
+		}
 		
+
+
 	}
 
-	
+
 }
 
 
 void initializeLibrary(HashTable<char*, Book>* bookTable) {
-	Book* b1 = new Book((char*) "h", (char*) "Flowers for Algernon", (char*) "Daniel Keyes", (char*) "Short Story", 1, 4, 1959, 1);
-	Book* b2 = new Book((char*)"book2", (char*) "Clean Code", (char*) "Robert Cecil Martin", (char*) "Non-Fiction", 1, 8, 2008, 1);
+	Book* b1 = new Book((char*)"h", (char*)"Flowers for Algernon", (char*)"Daniel Keyes", (char*)"Short Story", 1, 4, 1959, 1);
+	Book* b2 = new Book((char*)"book2", (char*)"Clean Code", (char*)"Robert Cecil Martin", (char*)"Non-Fiction", 1, 8, 2008, 1);
 	bookTable->AddElement(b1->GetId(), b1);
 	bookTable->AddElement(b2->GetId(), b2);
 }
@@ -45,4 +85,3 @@ void displayMenu() {
 	printf("3. Manage Books in Holding Queue\n");
 	printf("4. Exit\n");
 }
-
