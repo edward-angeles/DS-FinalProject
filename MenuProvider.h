@@ -238,8 +238,8 @@ public:
 		printf(
 			"\n\nw -> Move Forward\n"
 			"q -> Move Backward\n"
-			"s -> Sort"
-			"p -> Place Hold On Current Book"
+			"s -> Sort\n"
+			"p -> Place Hold On Current Book\n"
 			"x -> Exit to main menu\n"
 		);
 	}
