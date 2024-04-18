@@ -7,20 +7,20 @@
 
 using namespace std;
 
-typedef struct Node {
+typedef struct QueueNode {
 	int readerID;
-	Node* nextNode;
+	QueueNode* nextNode;
 	const char* bookTitle;
-} node;
+} QueueNode;
 
 typedef struct Queue {
-	node* front; 
-	node* rear;
+	QueueNode* front;
+	QueueNode* rear;
 } queue;
 
 
 queue* initializeQueue(void); // Initializes an empty queue
-node* createNewNode(int newReaderID, const char* bookTitle); // creates a new node 
+QueueNode* createNewNode(int newReaderID, const char* bookTitle); // creates a new node 
 bool isQueueEmpty(queue* queue); // Checks if the queue is empty
 void enqueue(queue* queue, int newReaderID, const char* bookTitle); // Adds a new reader to the queue to wait for a book 
 int dequeue(queue* queue); // Deletes the first reader after the book is returned
