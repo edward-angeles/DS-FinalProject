@@ -48,6 +48,7 @@ int main(void) {
 
 			Book* newBook = new Book(bookName, bookName, bookAuthor, bookGenre, bookDay, bookMonth, bookYear, bookAvailablity, bookReviews, bookRatings);
 			bookTable->AddElement(newBook->GetId(), newBook);
+			break;
 
 		default:
 
