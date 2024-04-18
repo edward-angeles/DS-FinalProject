@@ -153,8 +153,8 @@ public:
 		int choice = 0;
 		bool run = true;
 		DisplaySort();
+		char sortKey[50] = {};
 		InputWizard::GetIntNoBuffer(" ", &choice);
-		char* sortKey = (char*) "N/A";
 
 		switch (choice) {
 		case SORT_TITLE: {
@@ -208,7 +208,7 @@ public:
 
 	static void DisplaySort() {
 		printf(
-			"\n\nSort By:"
+			"\n\nSort By:\n"
 			"1 -> Title\n"
 			"2 -> Author\n"
 			"3 -> Genre\n"
