@@ -48,6 +48,7 @@ public:
 		else {
 			queue* bookQueue = queueTable->GetElementByKey(key);
 			enqueue(bookQueue, readerID, key);
+			printf("\nHold placed on: %s for: %d\n");
 		}
 	}
 };
