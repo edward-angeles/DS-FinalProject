@@ -80,15 +80,15 @@ public:
 
 
 	int GetDay(void) {
-		return this->day;
+		return day;
 	}
 
 	int GetMonth(void) {
-		return this->month;
+		return month;
 	}
 
 	int GetYear(void) {
-		return this->year;
+		return year;
 	}
 
 	void PrintDate(void) {
