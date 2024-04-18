@@ -21,7 +21,7 @@ bool operator<=(const Date& lhs, const Date& rhs) {
 
 
 
-SortedLinkedList::SortedLinkedList(Book* books[], std::string& key, int length): key(key), length(length) {
+SortedLinkedList::SortedLinkedList(Book* books[], char* key, int length): key(key), length(length) {
     head = nullptr;
     for (auto i = 0; i < length; i++) {
         this->books.push_back(books[i]);
@@ -74,7 +74,7 @@ void SortedLinkedList::SortLinkedList() {
 
 
 Node* SortedLinkedList::CreateNode(Book* book) {
-    auto node = new Node(book, nullptr);
+    auto node = new Node{book, nullptr};
     return node;
 }
 
