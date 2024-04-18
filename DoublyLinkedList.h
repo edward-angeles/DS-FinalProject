@@ -5,11 +5,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct BookList {
+typedef struct BookList {
 	Book* BookInfo;
 	struct BookList* PreviousBook;
 	struct BookList* NextBook;
-} temp;
+} BookList;
+
+typedef struct NavigateList {
+	struct BookList* head;
+	struct BookList* tail;
+} NavigateList;
 
 void AddNewBook(struct BookList** head, struct BookList** tail, Book* bookInfo);
 
