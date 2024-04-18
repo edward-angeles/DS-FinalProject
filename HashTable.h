@@ -26,7 +26,7 @@ private:
 	
 	// Create a hashed index value from a char* key
 	static int HashKey(char* key) {
-		int length = sizeof key / sizeof key[0];
+		int length = (sizeof key) / sizeof key[0];
 		
 		// Sum the characters in the key
 		int charSum = 0;
@@ -178,10 +178,10 @@ public:
 
 
 	// Return all stored values as simple, trimmed, array
-	V* GetValues(void) {
+	V** GetValues(void) {
 
 		//Allocate space for the new array based on num of elements in HashTable
-		V* valuesCopy = (V*)malloc((sizeof V) * GetSize());
+		V** valuesCopy = (V**)malloc((sizeof V) * GetSize());
 		if (valuesCopy == NULL) {
 			return valuesCopy;
 		}
@@ -199,7 +199,8 @@ public:
 					do {
 						valuesCopy[place] = current->GetValue();
 						place++;
-					} while (current->HasNext());
+						current = current->GetNext();
+					} while (current != NULL);
 				}
 				
 				// Otherwise the value is just added normally
