@@ -7,33 +7,22 @@ void displayMenu();
 
 int main(void) {
 	HashTable<char*, Book>* bookTable = new HashTable<char*, Book>;
-	queue* holdQueue = initializeQueue();
 	initializeLibrary(bookTable);
 	struct BookList* head = NULL;
 	struct Booklist* tail = NULL;
 
-	printf("%s", (*bookTable->GetElementByKey((char*)"h")).GetAuthor());
-	printf("%s", (*bookTable->GetElementByKey((char*)"book2")).GetAuthor());
-
-	bookTable->DeleteElementByKey((char*)"book2");
-
-	printf("%s", (*bookTable->GetElementByKey((char*)"h")).GetAuthor());
-	//printf("%s", (*bookTable->GetElementByKey((char*)"book2")).GetAuthor());
-	bookTable->GetElementByKey((char*)"book2");
-
-	printf("Welcome to ShelfSensei the Library Management System");
-
-	int choice, bookDay, bookMonth, bookYear, bookAvailablity, bookReviews;
-	float bookRatings;
-	char bookName[50], bookAuthor[50], bookGenre[50];
-
-	while (true) {
+	int choice = 0;
+	bool run = true;
+	while (run) {
 		displayMenu();
 		printf("Enter your choice: ");
 		scanf("%d", choice);
 
 		switch (choice) {
 		case 1:
+			int bookDay, bookMonth, bookYear, bookAvailablity, bookReviews = 0;
+			float bookRatings = 0;
+			char bookName[50], bookAuthor[50], bookGenre[50] = {};
 			printf("\nEnter book title: ");
 			scanf("%49s", bookName);
 
@@ -57,12 +46,15 @@ int main(void) {
 			printf("\nEnter book Ratings: ");
 			scanf("%1.1f", bookRatings);
 
+			Book* newBook = new Book(bookName, bookName, bookAuthor, bookGenre, bookDay, bookMonth, bookYear, bookAvailablity, bookReviews, bookRatings);
+			bookTable->AddElement(newBook->GetId(), newBook);
+
 		default:
 
 
 			printf("Invalid choice. Please try again.\n");
 		}
-		
+
 
 
 	}
@@ -85,3 +77,4 @@ void displayMenu() {
 	printf("3. Manage Books in Holding Queue\n");
 	printf("4. Exit\n");
 }
+
