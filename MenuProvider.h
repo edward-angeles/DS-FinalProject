@@ -10,8 +10,7 @@
 
 #define MENU_ADD_BOOK		1
 #define MENU_NAVIGATE		2
-#define MENU_ADD_QUEUE		3
-#define MENU_EXIT			4
+#define MENU_EXIT			3
 
 #define NAV_FORWARD			'w'
 #define NAV_BACKWARD		'q'
@@ -32,8 +31,7 @@
 #define CONTEXT_ADD			101
 #define CONTEXT_NAV			102
 #define CONTEXT_SORT		103
-#define CONTEXT_QUEUE		104
-#define CONTEXT_EXIT		105
+#define CONTEXT_EXIT		104
 
 
 
@@ -57,9 +55,6 @@ public:
 				return CONTEXT_NAV;
 			}
 
-			case MENU_ADD_QUEUE: {
-				return CONTEXT_QUEUE;
-			}
 			case MENU_EXIT: {
 				return CONTEXT_EXIT;
 			}
@@ -229,8 +224,7 @@ public:
 				"\nMenu:\n"
 				"1. Add Book to System\n"
 				"2. View Books in System\n"
-				"3. Manage Books in Holding Queue\n"
-				"4. Exit\n"
+				"3. Exit\n"
 		);
 	}
 
