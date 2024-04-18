@@ -15,7 +15,7 @@ int main(void) {
 	initializeLibrary(bookTable);
 	HashTable<char*, queue>* queueTable = new HashTable<char*, queue>();
 	SortedLinkedList* sortList = new SortedLinkedList(bookTable->GetValues(), (char*) "title", bookTable->GetSize());
-	ContextManager().Run(bookTable, queueTable, &sortList);
+	ContextManager::Run(bookTable, queueTable, &sortList);
 }
 
 
