@@ -152,6 +152,7 @@ public:
 	static int SortMenu(HashTable<char*, Book>* bookTable, SortedLinkedList** sortList) {
 		int choice = 0;
 		bool run = true;
+		DisplaySort();
 		InputWizard::GetIntNoBuffer(" ", &choice);
 		char* sortKey = (char*) "N/A";
 
@@ -181,7 +182,7 @@ public:
 			break;
 		}
 		case SORT_RATINGS: {
-			strcpy(sortKey, "ratimgs");
+			strcpy(sortKey, "ratings");
 			break;
 		}
 		default:
